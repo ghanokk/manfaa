@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Courses</title>
+    <link rel="stylesheet" href="../styles/Courses.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Available Courses</h1>
+        <nav class="navbar">
+            <div class="nav-left">MySchool</div>
+
+            <form class="nav-search" role="search">
+                <input type="search" placeholder="Search courses..." aria-label="Search courses">
+            </form>
+
+            <div class="nav-right">
+                <a class="link" href="#">Sign in</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="controls">
+            <select aria-label="Filter by category">
+                <option value="">All categories</option>
+                <option>Web Development</option>
+                <option>Data Science</option>
+                <option>Design</option>
+            </select>
+        </section>
+
+        <section class="courses-grid">
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>Intro to HTML & CSS</h3>
+                <p class="meta">Beginner · 4 weeks</p>
+                <p class="desc">Build responsive pages with HTML and CSS fundamentals.</p>
+                <button>View course</button>
+            </article>
+
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>JavaScript Essentials</h3>
+                <p class="meta">Intermediate · 6 weeks</p>
+                <p class="desc">Learn core JavaScript and DOM manipulation.</p>
+                <button>View course</button>
+            </article>
+
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>React Basics</h3>
+                <p class="meta">Intermediate · 5 weeks</p>
+                <p class="desc">Create components and manage state with React.</p>
+                <button>View course</button>
+            </article>
+
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>Python for Data</h3>
+                <p class="meta">Beginner · 8 weeks</p>
+                <p class="desc">Intro to Python, pandas and simple data analysis.</p>
+                <button>View course</button>
+            </article>
+
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>User Experience Design</h3>
+                <p class="meta">Beginner · 4 weeks</p>
+                <p class="desc">Learn UX principles, wireframing and usability testing.</p>
+                <button>View course</button>
+            </article>
+
+            <article class="card">
+                <div class="thumb" aria-hidden="true"></div>
+                <h3>Deployment & DevOps</h3>
+                <p class="meta">Advanced · 6 weeks</p>
+                <p class="desc">Basics of CI/CD, containers and hosting apps.</p>
+                <button>View course</button>
+            </article>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <small>© MySchool — All rights reserved</small>
+    </footer> 
+</body>
+</html>

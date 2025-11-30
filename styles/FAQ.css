@@ -1,0 +1,142 @@
+/* GLOBAL */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial;
+  
+  background: #f6f8fb;
+  color: #0b1220;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+}
+
+/* TOP BAR */
+.topbar {
+  background: linear-gradient(to right, #2563eb, #5684e9);
+  padding: 20px 20px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+  position: relative;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.back-btn {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.85);
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #0b1220;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.6);
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* TAGLINE */
+.tagline {
+  text-align: center;
+  color: #6b7280;
+  margin: 12px 0 28px;
+  font-size: 0.95rem;
+}
+
+/* MAIN CONTAINER */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+/* FAQ CARDS */
+.faq-list details {
+  background: #dbdada;
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  padding-right: 30px;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.05); /* light blue shadow */
+  transition: 0.18s ease;
+}
+
+.faq-list details:hover {
+  transform: translateY(-3px);
+  border-color: #2563eb;
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+}
+
+.faq-list details[open] {
+  border-color: #2563eb;
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.18);
+}
+
+/* TITLE */
+.faq-list summary {
+  list-style: none;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0b1220;
+  padding: 14px 0 14px 18px ;
+  position: relative;
+  cursor: pointer;
+}
+
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  margin-top: 10PX;
+  right: 0;
+  top: 0;
+  font-size: 1.25rem;
+  color: #2563eb;
+  font-weight: 800;
+  transition: transform 0.2s ease;
+}
+
+.faq-list details[open] summary::after {
+  content: "−";
+  transform: rotate(180deg);
+}
+
+/* HOVER COLOR */
+.faq-list summary:hover {
+  color: #2563eb;
+}
+
+/* ANSWER */
+.faq-list p {
+  margin: 12px 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  padding: 0 0 14PX 14PX;
+  line-height: 1.45;
+}
+
+/* FOOTER */
+.site-footer {
+  text-align: center;
+  padding: 28px 0 40px;
+  color: #6b7280;
+  font-size: 0.9rem;
+}

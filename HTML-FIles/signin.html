@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authentication</title>
+    <link rel="stylesheet" href="../styles/signin.css">
+</head>
+<body>
+    
+<a href="HomePage.html" class="back-btn">← Back to Home</a>
+
+
+<div class="auth-wrapper">
+
+    <!-- LOGIN -->
+    <section class="auth-box" id="login">
+        <h2>Log In</h2>
+
+        <form>
+            <label>Email</label>
+            <input type="email" required>
+
+            <label>Password</label>
+            <input type="password" required>
+
+            <button class="btn primary">Log In</button>
+
+            <p class="links">
+                <a href="#forgot">Forgot Password?</a>
+                <a href="#signup">Create an account</a>
+            </p>
+        </form>
+    </section>
+
+    <!-- SIGN UP -->
+    <section class="auth-box" id="signup">
+        <h2>Sign Up</h2>
+
+        <form>
+            <label>Full Name</label>
+            <input type="text" required>
+
+            <label>Email</label>
+            <input type="email" required>
+
+            <label>Password</label>
+            <input type="password" required>
+
+            <button class="btn primary">Create Account</button>
+
+            <p class="links">
+                <a href="#login">Already have an account?</a>
+            </p>
+        </form>
+    </section>
+
+    <!-- FORGOT PASSWORD -->
+    <section class="auth-box" id="forgot">
+        <h2>Reset Password</h2>
+
+        <form>
+            <label>Email</label>
+            <input type="email" required>
+
+            <button class="btn primary">Send Reset Email</button>
+
+            <p class="links">
+                <a href="#login">Back to login</a>
+            </p>
+        </form>
+    </section>
+
+</div>
+
+</body>
+</html>

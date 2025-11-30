@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Paiment</title>
+  <link rel="stylesheet" href="../styles/Paiment.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">MySchool</div>
+      <a class="back" href="HomePage.html">← Home</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="payment-card">
+      <h2>Complete your payment</h2>
+
+      <form class="payment-form" action="#" method="post" autocomplete="on">
+        <label class="field">
+          <span class="label">Cardholder name</span>
+          <input type="text" name="cardname" placeholder="Full name" required>
+        </label>
+
+        <label class="field">
+          <span class="label">Card number</span>
+          <input type="text" name="cardnumber" inputmode="numeric" pattern="[0-9\s]{13,19}" placeholder="1234 5678 9012 3456" maxlength="19" required>
+        </label>
+
+        <div class="row">
+          <label class="field small">
+            <span class="label">Expiry</span>
+            <input type="text" name="exp" placeholder="MM/YY" maxlength="5" required>
+          </label>
+
+          <label class="field small">
+            <span class="label">CVV</span>
+            <input type="text" name="cvv" inputmode="numeric" maxlength="4" placeholder="123" required>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="label">Billing email</span>
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </label>
+
+        <div class="summary">
+          <h3>Order summary</h3>
+          <div class="line"><span>Course — Intro to HTML &amp; CSS</span><span class="price">$29</span></div>
+          <div class="line total"><span>Total</span><span class="price">$29</span></div>
+        </div>
+
+        <button class="btn pay" type="submit">buy</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 MySchool</small>
+  </footer>
+</body>
+</html>

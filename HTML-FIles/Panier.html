@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panier</title>
+  <link rel="stylesheet" href="../styles/cart.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <div class="brand">MySchool</div>
+      <a class="back" href="HomePage.html">← Accueil</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h1>your cart</h1>
+
+    <section class="cart">
+      <ul class="cart-list">
+        <li class="cart-item">
+          <div class="thumb">IMG</div>
+          <div class="info">
+            <h3 class="title">Intro to HTML &amp; CSS</h3>
+            <p class="meta">Beginner · 4 semaines</p>
+          </div>
+          <div class="qty">
+            <label>Qty
+              <input type="number" min="1" value="1">
+            </label>
+          </div>
+          <div class="price">€29</div>
+          <button class="remove">remove</button>       
+        </li>
+       
+
+        <li class="cart-item">
+          <div class="thumb">IMG</div>
+          <div class="info">
+            <h3 class="title">JavaScript Essentials</h3>
+            <p class="meta">Intermediate · 6 semaines</p>
+          </div>
+          <div class="qty">
+            <label>Qty
+              <input type="number" min="1" value="1">
+            </label>
+          </div>
+          <div class="price">€39</div>
+          <button class="remove">remove</button>
+        </li>
+      </ul>
+
+      <aside class="summary">
+        <h2>Récapitulatif</h2>
+        <div class="line"><span>Sub-total</span><span>€68</span></div>
+        <div class="line"><span>Tax</span><span>€13.60</span></div>
+        <div class="line total"><span>Total</span><span>€81.60</span></div>
+
+        <div class="actions">
+          <a class="btn ghost" href="Courses.html">Continuer vos achats</a>
+          <button class="btn primary" type="button">Procéder au paiement</button>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>© 2025 MySchool</small>
+  </footer>
+</body>
+</html>
