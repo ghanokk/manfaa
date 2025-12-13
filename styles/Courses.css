@@ -10,7 +10,7 @@ body{
 }
 
 .site-header{
-  padding:20px;
+  padding:10px;
   border-bottom:1px solid rgba(0,0,0,0.04);
   background:#ffffff;
 }
@@ -31,16 +31,14 @@ body{
   margin:0 auto;
   padding:0 12px;
 }
-.nav-left, .nav-right{
+.nav-left, .nav-right, .link{
   flex:0 0 auto;
   color:#6b7280;
   font-weight:600;
-}
-.nav-right .link{
-  color:#6b7280;
-  text-decoration:none;
   font-size:0.95rem;
+  text-decoration:none;
 }
+
 .nav-search{
   flex:1 1 auto;
   display:flex;
@@ -60,9 +58,9 @@ body{
 
 /* main container */
 .container{
-  max-width:1100px;
-  margin:28px auto;
-  padding:0 16px 40px;
+  max-width:full;
+  margin:28px 15%;
+  padding:0 16px 60px;
 }
 
 /* controls */
@@ -83,7 +81,7 @@ body{
 .courses-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:18px;
+  gap: 30px;
 }
 
 /* responsive */
@@ -109,12 +107,15 @@ body{
   transform:translateY(-6px);
   box-shadow:0 10px 30px rgba(16,24,40,0.12);
 }
-.thumb{
-  height:110px;
-  border-radius:8px;
-  background:linear-gradient(135deg,#2563eb, #6fb1ff);
-  margin-bottom:12px;
+.thumb img{
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 9px;
+  margin-bottom: 15px;
 }
+
 .card h3{
   margin:0 0 6px 0;
   font-size:1.05rem;
