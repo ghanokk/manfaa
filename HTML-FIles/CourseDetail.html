@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Detail</title>
+    <link rel="stylesheet" href="../styles/CourseDetail.css">
+ </head>
+<body>
+   <header class="site-header">
+        <h1>Course Detail</h1>
+        <nav class="navbar">
+           <a class="link" href="HomePage.html">Ifada</a>
+
+            <form class="nav-search" role="search">
+                <input type="search" placeholder="Search courses..." aria-label="Search courses">
+            </form>
+
+            <div class="nav-right">
+                <a class="link" href="signin.html">Sign in</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="course-page container">
+        <section class="hero">
+            <div class="hero-media">
+                <img src="../images/course1.svg" alt="Course hero image">
+            </div>
+            <div class="hero-info">
+                <h1>Advanced Web Development</h1>
+                <p class="meta">Intermediate · 8 weeks · Self-paced</p>
+                <p class="excerpt">Deep dive into modern web development with practical projects, testing, and deployment.</p>
+                <div class="hero-actions">
+                    <button class="primary" onclick="location.href='Paiment.html'">Enroll Now</button>
+                    <button class="outline">Preview Curriculum</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-grid">
+            <article class="main-col">
+                <h2>Course Overview</h2>
+                <p>This course covers advanced HTML, CSS techniques, responsive design, accessibility, client-side performance, modern JavaScript patterns, and building deployable projects.</p>
+
+                <h3>What you'll learn</h3>
+                <ul class="learn-list">
+                    <li>Responsive layouts with CSS Grid & Flexbox</li>
+                    <li>Component-driven design and utility patterns</li>
+                    <li>Performance optimization and best practices</li>
+                    <li>Testing, CI, and deployment basics</li>
+                </ul>
+
+                <h3>Curriculum</h3>
+                <ol class="curriculum">
+                    <li>Module 1 — Advanced HTML & Semantics</li>
+                    <li>Module 2 — Modern CSS (Grid, Flexbox, Animations)</li>
+                    <li>Module 3 — JavaScript Patterns & Tooling</li>
+                    <li>Module 4 — Testing & Deployment</li>
+                </ol>
+            </article>
+
+            <aside class="side-col">
+                <div class="card">
+                    <p class="price">$49</p>
+                    <p class="small">One-time payment</p>
+                    <button class="primary full" onclick="location.href='Paiment.html'">Enroll Now</button>
+                </div>
+
+                <div class="card instructor">
+                    <h4>Instructor</h4>
+                    <div class="instructor-row">
+                        <div class="avatar"><img src="../images/course1.svg" alt="Instructor"></div>
+                        <div>
+                            <p class="name">Jane Doe</p>
+                            <p class="role">Senior Web Engineer</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>
