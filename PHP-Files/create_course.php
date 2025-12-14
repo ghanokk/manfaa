@@ -4,7 +4,7 @@ include 'db.php';
 if(!isset($_SESSION['user_id'])){
     header("Location: login.php"); // ma3netha mazal marahouch logged in
 }else{
-    if($_SESSION['user_role'] == "instructor"){
+    if($_SESSION['user_role'] == "instructor" || $_SESSION['user_role'] == "admin"){
 
     }
     else{
