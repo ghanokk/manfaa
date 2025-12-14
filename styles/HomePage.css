@@ -20,7 +20,7 @@ body{
   justify-content:space-between;
   gap:12px;
 }
-.brand{ font-weight:700; color:#2563eb; font-size:1.1rem; }
+.brand{ font-weight:1000; color:#2563eb; font-size:2.6rem; }
 .nav-links{ list-style:none; margin:0; padding:0; display:flex; gap:12px; align-items:center; }
 .nav-links a{ text-decoration:none; color:#6b7280; padding:8px 10px; border-radius:6px; }
 .nav-links a:hover{ background:rgba(37,99,235,0.06); color:#2563eb; }
@@ -160,4 +160,5 @@ body{
   .features, .grid{ grid-template-columns:1fr; }
   .hero h1{ font-size:1.5rem; }
   .nav-links{ display:none; }
+  .brand{ font-size:2.6rem; }
 }

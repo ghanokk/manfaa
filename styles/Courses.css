@@ -33,7 +33,7 @@ body{
 }
 .nav-left, .nav-right, .link{
   flex:0 0 auto;
-  color:#6b7280;
+  color:#2563eb;
   font-weight:600;
   font-size:0.95rem;
   text-decoration:none;
