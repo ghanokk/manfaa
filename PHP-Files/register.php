@@ -1,49 +1,96 @@
 <?php
 session_start();
-include 'db.php';
+require 'db.php';
 
 $message = '';
 $message_type = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
+
+    $name     = trim($_POST['name'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
+    $role     = trim($_POST['role'] ?? 'student');
 
     if ($name === '' || $email === '' || $password === '') {
         $message = 'All fields are required.';
         $message_type = 'error';
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $message = 'Please provide a valid email address.';
-        $message_type = 'error';
-    } else {
-        // check existing email
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->bind_param('s', $email); // means the value is treated as string
-        $stmt->execute();
-        $stmt->store_result();
-        if ($stmt->num_rows > 0) {
-            $message = 'Email already registered. <a href="login.php">Sign in</a>';
-            $message_type = 'error';
-            $stmt->close();
-        } else {
-            $stmt->close();
 
-            // hash and insert
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $message = 'Invalid email address.';
+        $message_type = 'error';
+
+    } else {
+
+        /* =====================
+           1️⃣ Check email exists
+        ===================== */
+        $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $check->bind_param("s", $email);
+        $check->execute();
+        $check->store_result();
+
+        if ($check->num_rows > 0) {
+            $message = 'Email already registered.';
+            $message_type = 'error';
+            $check->close();
+
+        } else {
+            $check->close();
+
+            /* =====================
+               2️⃣ Insert user
+            ===================== */
             $hashed = password_hash($password, PASSWORD_DEFAULT);
+
             $ins = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-            $ins->bind_param('sss', $name, $email, $hashed);
+            $ins->bind_param("sss", $name, $email, $hashed);
+
             if ($ins->execute()) {
-                $message = 'Registration successful. <a href="login.php">Sign in</a>';
-                $message_type = 'success';
-            } 
-            /* === This Step Is For Me For Debugging === */
-            else {
-                if ($ins->errno == 1062) {
-                    $message = 'Database error: duplicate primary key detected. Ensure the users.id column is AUTO_INCREMENT: <code>ALTER TABLE users MODIFY id INT NOT NULL AUTO_INCREMENT PRIMARY KEY;</code>';
-                } else {
-                    $message = 'Database error: ' . htmlspecialchars($ins->error);
+
+                $user_id = $conn->insert_id;
+
+                /* =====================
+                   3️⃣ Validate role
+                ===================== */
+                $allowed_roles = ['admin', 'instructor', 'student'];
+                if (!in_array($role, $allowed_roles, true)) {
+                    $role = 'student';
                 }
+
+                /* =====================
+                   4️⃣ Get role_id
+                ===================== */
+                $rstmt = $conn->prepare("SELECT id FROM roles WHERE name = ?");
+                $rstmt->bind_param("s", $role);
+                $rstmt->execute();
+                $rres = $rstmt->get_result();
+
+                if ($rres->num_rows === 0) {
+                    // role not found → create it
+                    $insr = $conn->prepare("INSERT INTO roles (name) VALUES (?)");
+                    $insr->bind_param("s", $role);
+                    $insr->execute();
+                    $role_id = $conn->insert_id;
+                    $insr->close();
+                } else {
+                    $role_id = (int)$rres->fetch_assoc()['id'];
+                }
+                $rstmt->close();
+
+                /* =====================
+                   5️⃣ Insert user_roles
+                ===================== */
+                $ur = $conn->prepare("INSERT INTO user_roles (user_id, role_id) VALUES (?, ?)");
+                $ur->bind_param("ii", $user_id, $role_id);
+                $ur->execute();
+                $ur->close();
+
+                $message = 'Registration successful. You can now log in.';
+                $message_type = 'success';
+
+            } else {
+                $message = 'Database error: ' . $ins->error;
                 $message_type = 'error';
             }
             $ins->close();
@@ -86,6 +133,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                 <label>Password</label>
                 <input type="password" name="password" required>
+
+                    <label>Role</label>
+                    <select name="role" required>
+                        <option value="student">Student</option>
+                        <option value="instructor">Instructor</option>
+                        <option value="admin">Admin</option>
+                    </select>
 
                 <button class="btn primary" type="submit" name="submit">Create Account</button>
 

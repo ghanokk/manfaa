@@ -45,8 +45,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($password_ok) {
+        // fetch roles (if your schema uses a user_roles join table)
+        $roleStmt = $conn->prepare("SELECT r.name AS role_name FROM user_roles ur JOIN roles r ON ur.role_id = r.id WHERE ur.user_id = ?");
+        if ($roleStmt) {
+            $roleStmt->bind_param('i', $row['id']);
+            $roleStmt->execute();
+            $roleRes = $roleStmt->get_result();
+            $roles = [];
+            while ($roleRow = $roleRes->fetch_assoc()) {
+                $roles[] = $roleRow['role_name'];
+            }
+            $roleStmt->close();
+        } else {
+            $roles = [];
+        }
+
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['user_name'] = $row['name'];
+
+        if (count($roles) === 1) {
+            $_SESSION['user_role'] = $roles[0];
+        } elseif (count($roles) > 1) {
+            $_SESSION['user_role'] = $roles;
+        } else {
+            $_SESSION['user_role'] = null;
+        }
+
         header('Location: dashboard.php');
         exit;
     } else {

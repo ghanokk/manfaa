@@ -61,6 +61,20 @@ input:focus {
   background: #ffffff;
 }
 
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.15);
+  background: #f7f7f7;
+  outline: none;
+  transition: 0.2s;
+}
+
+select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
 /* BUTTONS */
 .btn {
   padding: 10px;

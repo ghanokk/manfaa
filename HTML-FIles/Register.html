@@ -13,18 +13,24 @@
         <div class="auth-box">
             <h2>Sign Up</h2>
 
-                    <form action="../PHP-Files/register.php" method="POST">
-            <label>Name</label>
-                        <input type="text" name="name" required>
+            <form action="../PHP-Files/register.php" method="POST">
+                <label>Name</label>
+                <input type="text" name="name" required>
 
-            <label>Email</label>
-                        <label>Email</label>
-                        <input type="email" name="email" required>
+                <label>Email</label>
+                <input type="email" name="email" required>
 
-            <label>Password</label>
-                        <input type="password" name="password" required>
+                <label>Password</label>
+                <input type="password" name="password" required>
 
-                        <button class="btn primary" type="submit" name="submit">Create Account</button>
+                <label>Role</label>
+                <select name="role" required>
+                    <option value="student">Student</option>
+                    <option value="instructor">Instructor</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <button class="btn primary" type="submit" name="submit">Create Account</button>
 
             <p class="links">
                 <a href="signin.html">Already have an account?</a>
