@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/auth.css">
+    <title>Register</title>
+</head>
+<body>
+    <a href="HomePage.html" class="back-btn">← Back to Home</a>
+
+    <div class="auth-wrapper">
+        <div class="auth-box">
+            <h2>Sign Up</h2>
+
+                    <form action="../PHP-Files/register.php" method="POST">
+            <label>Name</label>
+                        <input type="text" name="name" required>
+
+            <label>Email</label>
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+
+            <label>Password</label>
+                        <input type="password" name="password" required>
+
+                        <button class="btn primary" type="submit" name="submit">Create Account</button>
+
+            <p class="links">
+                <a href="signin.html">Already have an account?</a>
+            </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
