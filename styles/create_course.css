@@ -1,0 +1,12 @@
+/* Page-specific styles for Create Course */
+.form-row{ display:flex; gap:10px; }
+.form-row > div{ flex:1; }
+.message { margin-bottom: 12px; padding: 8px; border-radius: 8px; }
+.message.success{ background:#d1fae5;color:#065f46 }
+.message.error{ background:#fee2e2;color:#7f1d1d }
+img.preview{ max-width:100%; height:auto; margin-top:8px; border-radius:6px }
+
+/* Small screens: stack the form-row */
+@media (max-width: 560px) {
+  .form-row { flex-direction: column; }
+}
