@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                 <button class="btn primary" type="submit" name="submit">Create Account</button>
 
                 <p class="links">
-                    <a href="signin.html">Already have an account?</a>
+                    <a href="login.php">Already have an account?</a>
                 </p>
             </form>
         </div>
