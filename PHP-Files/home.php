@@ -14,10 +14,9 @@ session_start();
     <nav class="nav">
       <div class="brand">Ifada</div>
       <ul class="nav-links">
-        <li><a href="HomePage.html">Home</a></li>
-        <li><a href="Courses.html">Courses</a></li>
-        <li><a href="FAQ.html">FAQ</a></li>
-        <li><a href="signin.html" class="btn small">Sign in</a></li>
+        <li><a href="courses.php">Courses</a></li>
+        <li><a href="faq.php">FAQ</a></li>
+        <li><a href="login.php" class="btn small">Sign in</a></li>
       </ul>
     </nav>
   </header>
@@ -28,8 +27,8 @@ session_start();
         <h1>Learn. Build. Grow.</h1>
         <p>Practical courses and hands‑on projects to level up your web development skills.</p>
         <div class="hero-ctas">
-          <a href="Courses.html" class="btn primary">Browse Courses</a>
-          <a href="FAQ.html" class="btn ghost">How it works</a>
+          <a href="courses.php" class="btn primary">Browse Courses</a>
+          <a href="faq.php" class="btn ghost">How it works</a>
         </div>
       </div>
     </section>
@@ -84,10 +83,9 @@ session_start();
     <div class="footer-col">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="HomePage.html">Home</a></li>
-        <li><a href="Courses.html">Courses</a></li>
-        <li><a href="FAQ.html">FAQ</a></li>
-        <li><a href="Login.html">Sign in</a></li>
+        <li><a href="courses.php">Courses</a></li>
+        <li><a href="faq.php">FAQ</a></li>
+        <li><a href="login.php">Sign in</a></li>
       </ul>
     </div>
 
