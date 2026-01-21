@@ -6,7 +6,7 @@ $message = '';
 $message_type = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-
+    $email = $_SESSION['email'] ;
     $name     = trim($_POST['name'] ?? '');
     $email    = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     </style>
 </head>
 <body>
-    <a href="HomePage.html" class="back-btn">← Back to Home</a>
+    <a href="home.php" class="back-btn">← Back to Home</a>
 
     <div class="auth-wrapper">
         <div class="auth-box">
