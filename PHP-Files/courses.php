@@ -1,5 +1,12 @@
 <?php
 session_start();
+include 'db.php';
+$sql = "SELECT * FROM courses";
+// $result = $conn->query($sql);
+$result =  mysqli_query($conn, $sql);
+if (!$result) {
+    die("Error retrieving courses: " . mysqli_error($conn));
+}else {}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,65 +33,41 @@ session_start();
     </header>
 
     <main class="container">
+
         <section class="controls">
             <select aria-label="Filter by category">
-                <option value="">All categories</option>
-                <option>Web Development</option>
-                <option>Data Science</option>
-                <option>Design</option>
+                <option value="">All Levels</option>
+                <option>Beginner</option>
+                <option>Intermediate</option>
+                <option>Advanced</option>
             </select>
         </section>
 
-        <section class="courses-grid">
+   <section class="courses-grid">
+    
+    <!--
+    courses-grid
+        ├─ card (course 1)
+        ├─ card (course 2)
+        ├─ card (course 3)
+     -->
+        <?php
+        mysqli_data_seek($result, 0); // It moves the MySQL result pointer back to the first row
+        while($row = mysqli_fetch_assoc($result)){
+        ?>
             <article class="card">
-                 <div class="thumb"><img src="../images/course1.svg" alt="Course thumbnail"></div>
-                <h3>Intro to HTML & CSS</h3>
-                <p class="meta">Beginner · 4 weeks</p>
-                <p class="desc">Build responsive pages with HTML and CSS fundamentals.</p>
+                <div class="thumb">
+                    <img src="../<?php echo htmlspecialchars($row['image']); ?>" alt="Course thumbnail">
+                </div>
+                <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+                <p class="meta"><?php echo htmlspecialchars($row['level']); ?></p>
+                <p class="desc"><?php echo htmlspecialchars($row['description']); ?></p>
                 <button>View course</button>
             </article>
+        <?php } ?>
+    </section>
 
-            <article class="card">
-                 <div class="thumb"><img src="../images/course2.svg" alt="Course thumbnail"></div>
-                <h3>JavaScript Essentials</h3>
-                <p class="meta">Intermediate · 6 weeks</p>
-                <p class="desc">Learn core JavaScript and DOM manipulation.</p>
-                <button>View course</button>
-            </article>
-
-            <article class="card">
-                 <div class="thumb"><img src="../images/course3.svg" alt="Course thumbnail"></div>>
-                <h3>React Basics</h3>
-                <p class="meta">Intermediate · 5 weeks</p>
-                <p class="desc">Create components and manage state with React.</p>
-                <button>View course</button>
-            </article>
-
-            <article class="card">
-              <div class="thumb"><img src="../images/course4.svg" alt="Course thumbnail"></div>
-                <h3>Python for Data</h3>
-                <p class="meta">Beginner · 8 weeks</p>
-                <p class="desc">Intro to Python, pandas and simple data analysis.</p>
-                <button>View course</button>
-            </article>
-
-            <article class="card">
-                 <div class="thumb"><img src="../images/course5.svg" alt="Course thumbnail"></div>
-                <h3>User Experience Design</h3>
-                <p class="meta">Beginner · 4 weeks</p>
-                <p class="desc">Learn UX principles, wireframing and usability testing.</p>
-                <button>View course</button>
-            </article>
-
-            <article class="card">
-                 <div class="thumb"><img src="../images/course6.svg" alt="Course thumbnail"></div>
-                <h3>Deployment & DevOps</h3>
-                <p class="meta">Advanced · 6 weeks</p>
-                <p class="desc">Basics of CI/CD, containers and hosting apps.</p>
-                <button>View course</button>
-            </article>
-        </section>
-    </main>
+</main>
 
     <footer class="site-footer">
         <small>© Ifada — All rights reserved</small>
