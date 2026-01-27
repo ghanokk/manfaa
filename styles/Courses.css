@@ -33,7 +33,7 @@ body{
 }
 .nav-left, .nav-right, .link{
   flex:0 0 auto;
-  color:#6b7280;
+  color:#2563eb;
   font-weight:600;
   font-size:0.95rem;
   text-decoration:none;
@@ -82,6 +82,13 @@ body{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap: 30px;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.courses-grid:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 30px rgba(33, 50, 85, 0.637);
+  background-color: #2a6bee7e;
 }
 
 /* responsive */
@@ -105,7 +112,8 @@ body{
 }
 .card:hover{
   transform:translateY(-6px);
-  box-shadow:0 10px 30px rgba(16,24,40,0.12);
+  box-shadow:0 10px 30px rgb(33, 50, 85);
+  background-color: #2a6bee;
 }
 .thumb img{
   display: block;
@@ -144,11 +152,3 @@ body{
   background:#357fcc;
 }
 
-/* footer */
-.site-footer{
-  text-align:center;
-  padding:20px 0;
-  color:#6b7280;
-  border-top:1px solid rgba(0,0,0,0.04);
-  margin-top:30px;
-}
