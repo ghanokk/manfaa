@@ -2,7 +2,7 @@
 $server = "localhost";
 $user = "root";
 $pass = "";
-$dbname = "ifada_db";
+$dbname = "ifada_db2";
 
 $conn = new mysqli($server, $user, $pass, $dbname);
 
