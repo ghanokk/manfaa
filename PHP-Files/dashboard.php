@@ -460,9 +460,6 @@ if (is_array($userRole) && !empty($userRole)) {
         <h1>Dashboard</h1>
         <nav class="navbar">
             <a class="link" href="homePage.php" style="padding:8px 10px; font-size:0.95rem;border-radius: 15px; position: relative; background-color: #0864c5ff;color: white;margin-left: 30px;">Ifada</a>
-            <form class="nav-search" role="search">
-                <input type="search" placeholder="Search courses..." aria-label="Search courses">
-            </form>
             <div class="nav-right">
                 <?php if (in_array('admin', (array)$userRole)): ?>
                     <a class="link" href="admin_dash.php" style="padding:8px 10px; font-size:0.95rem; border-radius: 15px; background-color: #dc2626; color: white; margin-right: 10px;">

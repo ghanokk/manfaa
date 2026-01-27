@@ -34,13 +34,12 @@ function getImagePath($imagePath) {
     if (empty($imagePath)) {
         return '';
     }
-    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0) {
+    // If it already starts with http, /, or ../ or ./, return as is
+    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0 || strpos($imagePath, '../') === 0 || strpos($imagePath, './') === 0) {
         return $imagePath;
     }
-    if (strpos($imagePath, '../') !== 0 && strpos($imagePath, './') !== 0) {
-        return '../images/' . $imagePath;
-    }
-    return $imagePath;
+    // For paths like "images/courses/...", prepend ../
+    return '../' . $imagePath;
 }
 
 // Check if user owns this course

@@ -52,12 +52,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_event_id'])) {
 // Handle ban/unban user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ban_user_id'])) {
     $banUserId = intval($_POST['ban_user_id']);
-    $newStatus = $_POST['ban_status'] ?? 'banned';
+    $newStatus = intval($_POST['ban_status'] ?? 0); // 0 = active, 1 = banned
     
     if ($banUserId !== $userId) { // Can't ban yourself
         $updateSql = "UPDATE users SET status = ? WHERE id = ?";
         $updateStmt = $conn->prepare($updateSql);
-        $updateStmt->bind_param('si', $newStatus, $banUserId);
+        $updateStmt->bind_param('ii', $newStatus, $banUserId);
         $updateStmt->execute();
         $updateStmt->close();
         $_SESSION['success_message'] = 'User status updated successfully.';
@@ -155,7 +155,7 @@ while ($event = $eventsResult->fetch_assoc()) {
 $eventsStmt->close();
 
 // Fetch all users with their roles
-$usersSql = "SELECT DISTINCT u.id, u.name, u.email, u.status,
+$usersSql = "SELECT DISTINCT u.id, u.name, u.email, IFNULL(u.status, 0) as status,
             CASE 
                 WHEN ur.role_id = 3 THEN 'admin'
                 WHEN ur.role_id = 2 THEN 'instructor'
@@ -181,7 +181,7 @@ $totalUsers = count($users);
 $bannedUsers = 0;
 $bannedIds = [];
 foreach ($users as $u) {
-    if ($u['status'] === 'banned' && !in_array($u['id'], $bannedIds)) {
+    if ($u['status'] == 1 && !in_array($u['id'], $bannedIds)) { // 1 = banned
         $bannedUsers++;
         $bannedIds[] = $u['id'];
     }
@@ -658,17 +658,17 @@ foreach ($users as $u) {
                                     </form>
                                 </td>
                                 <td>
-                                    <span class="<?php echo $user['status'] === 'banned' ? 'status-banned' : 'status-active'; ?>">
-                                        <?php echo ucfirst($user['status']); ?>
+                                    <span class="<?php echo $user['status'] == 1 ? 'status-banned' : 'status-active'; ?>">
+                                        <?php echo $user['status'] == 1 ? 'Banned' : 'Active'; ?>
                                     </span>
                                 </td>
                                 <td>
                                     <?php if ($user['id'] !== $userId): ?>
-                                        <form method="POST" style="display: inline;">
+                                        <form method="POST" style="display: inline;" id="ban-form-<?php echo $user['id']; ?>">
                                             <input type="hidden" name="ban_user_id" value="<?php echo $user['id']; ?>">
-                                            <input type="hidden" name="ban_status" value="<?php echo $user['status'] === 'banned' ? 'active' : 'banned'; ?>">
-                                            <button type="submit" class="<?php echo $user['status'] === 'banned' ? 'btn-secondary' : 'btn-danger'; ?>">
-                                                <?php echo $user['status'] === 'banned' ? '✓ Unban' : '🚫 Ban'; ?>
+                                            <input type="hidden" name="ban_status" value="<?php echo $user['status'] == 1 ? '1' : '0'; ?>" id="ban-status-<?php echo $user['id']; ?>">
+                                            <button type="button" class="ban-btn <?php echo $user['status'] == 1 ? 'btn-secondary' : 'btn-danger'; ?>" data-status="<?php echo $user['status']; ?>" data-user-id="<?php echo $user['id']; ?>" onclick="updateBanButton(this)">
+                                                <?php echo $user['status'] == 1 ? '✓ Unban' : '🚫 Ban'; ?>
                                             </button>
                                         </form>
                                     <?php else: ?>
@@ -692,7 +692,7 @@ foreach ($users as $u) {
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="hpage.php">Home</a></li>
+                    <li><a href="homePage.php">Home</a></li>
                     <li><a href="courses.php">Courses</a></li>
                     <li><a href="event.php">Events</a></li>
                     <li><a href="logout.php">Logout</a></li>
@@ -732,6 +732,31 @@ foreach ($users as $u) {
                 selectedTab.classList.add('active');
                 event.target.classList.add('active');
             }
+        }
+
+        function updateBanButton(button) {
+            const currentStatus = button.getAttribute('data-status');
+            const userId = button.getAttribute('data-user-id');
+            const banStatusInput = document.getElementById('ban-status-' + userId);
+            
+            // Update button text and class (0 = active, 1 = banned)
+            if (currentStatus == 1) { // Currently banned, unban
+                button.textContent = '🚫 Ban';
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-danger');
+                button.setAttribute('data-status', '0');
+                banStatusInput.value = '0'; // Set to active
+            } else { // Currently active, ban
+                button.textContent = '✓ Unban';
+                button.classList.remove('btn-danger');
+                button.classList.add('btn-secondary');
+                button.setAttribute('data-status', '1');
+                banStatusInput.value = '1'; // Set to banned
+            }
+            
+            // Submit the form
+            const form = document.getElementById('ban-form-' + userId);
+            form.submit();
         }
     </script>
 </body>

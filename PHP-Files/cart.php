@@ -74,13 +74,12 @@ function getImagePath($imagePath) {
     if (empty($imagePath)) {
         return '';
     }
-    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0) {
+    // If it already starts with http, /, ../ or ./, return as is
+    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0 || strpos($imagePath, '../') === 0 || strpos($imagePath, './') === 0) {
         return $imagePath;
     }
-    if (strpos($imagePath, '../') !== 0 && strpos($imagePath, './') !== 0) {
-        return '../images/' . $imagePath;
-    }
-    return $imagePath;
+    // For paths like "images/courses/...", prepend ../ so path resolves from PHP-Files
+    return '../' . $imagePath;
 }
 ?>
 
@@ -365,9 +364,7 @@ function getImagePath($imagePath) {
         <h1>🛒 Shopping Cart</h1>
         <nav class="navbar">
             <a class="link" href="homePage.php">Ifada</a>
-            <form class="nav-search" role="search">
-                <input type="search" placeholder="Search courses..." aria-label="Search courses">
-            </form>
+            <!-- search removed for cart page -->
             <div class="nav-right">
                 <?php if ($isLoggedIn): ?>
                     <a class="link" href="dashboard.php">Dashboard</a>
@@ -433,20 +430,10 @@ function getImagePath($imagePath) {
                     <span>Subtotal:</span>
                     <span class="price">$<?php echo number_format($totalPrice, 2); ?></span>
                 </div>
-                
-                <div class="summary-line">
-                    <span>Tax (10%):</span>
-                    <span class="price">$<?php echo number_format($totalPrice * 0.10, 2); ?></span>
-                </div>
-                
-                <div class="summary-line">
-                    <span>Shipping:</span>
-                    <span class="price">Free</span>
-                </div>
 
                 <div class="summary-line total">
                     <span>Total:</span>
-                    <span class="price">$<?php echo number_format($totalPrice * 1.10, 2); ?></span>
+                    <span class="price">$<?php echo number_format($totalPrice, 2); ?></span>
                 </div>
 
                 <button class="btn-checkout" onclick="location.href='paiment.php'">Proceed to Checkout</button>

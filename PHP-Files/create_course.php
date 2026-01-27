@@ -75,7 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = (int)$_SESSION['user_id'];
         $stmt->bind_param('ssdiss', $title, $description, $price, $level, $user_id, $image_path);
         if ($stmt->execute()) {
-            $success = 'Course created successfully.';
+            $_SESSION['success_message'] = 'Course created successfully.';
+            header('Location: courses.php');
+            exit;
         } else {
             $errors[] = 'Database error: ' . htmlspecialchars($stmt->error);
         }
@@ -94,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Create Course</title>
 </head>
 <body>
-  <a href="hpage.php" class="back-btn">← Back to homepage</a>
+  <a href="homePage.php" class="back-btn">← Back to homepage</a>
 
   <div class="auth-wrapper">
     <div class="auth-box">

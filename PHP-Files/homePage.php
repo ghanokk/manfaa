@@ -24,13 +24,12 @@ function getImagePath($imagePath) {
     if (empty($imagePath)) {
         return '';
     }
-    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0) {
-        return $imagePath;
-    }
-    if (strpos($imagePath, '../') !== 0 && strpos($imagePath, './') !== 0) {
-        return '../images/' . $imagePath;
-    }
+  // If it's an absolute URL or already a root/relative path, return as-is
+  if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0 || strpos($imagePath, '../') === 0 || strpos($imagePath, './') === 0) {
     return $imagePath;
+  }
+  // Otherwise, prepend one level up to reach the images folder from PHP-Files
+  return '../' . $imagePath;
 }
 
 // Define color classes for cards
@@ -175,7 +174,7 @@ $colors = [
 
     .course-image {
       width: 100%;
-      height: 140px;
+      height: 120px;
       background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
       display: flex;
       align-items: center;
@@ -467,7 +466,7 @@ $colors = [
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="hpage.php">Home</a></li>
+          <li><a href="homePage.php">Home</a></li>
           <li><a href="courses.php">Courses</a></li>
           <li><a href="FAQ.html">FAQ</a></li>
           <li><a href="login.php">Sign in</a></li>

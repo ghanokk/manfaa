@@ -45,13 +45,12 @@ function getImagePath($imagePath) {
     if (empty($imagePath)) {
         return '';
     }
-    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0) {
+    // If it already starts with http, /, or ../ or ./, return as is
+    if (strpos($imagePath, 'http') === 0 || strpos($imagePath, '/') === 0 || strpos($imagePath, '../') === 0 || strpos($imagePath, './') === 0) {
         return $imagePath;
     }
-    if (strpos($imagePath, '../') !== 0 && strpos($imagePath, './') !== 0) {
-        return '../images/' . $imagePath;
-    }
-    return $imagePath;
+    // For paths like "images/courses/...", prepend ../
+    return '../' . $imagePath;
 }
 
 // Fetch user's owned courses (if logged in)
@@ -185,7 +184,7 @@ if ($isLoggedIn) {
 
         .course-card-image {
             width: 100%;
-            height: 160px;
+            height: 240px;
             background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
             display: flex;
             align-items: center;
@@ -417,9 +416,31 @@ if ($isLoggedIn) {
         <p><?php echo $result->num_rows; ?> courses available</p>
     </section>
 
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <div style="max-width: 1200px; margin: 20px auto; padding: 15px; background-color: #d4edda; color: #155724; border-radius: 4px; border-left: 4px solid #28a745;">
+            ✓ <?php echo htmlspecialchars($_SESSION['success_message']); ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+
     <div class="courses-container">
+        <div style="margin-bottom: 30px;">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <input 
+                    type="text" 
+                    id="courseSearch" 
+                    placeholder="🔍 Search courses by title..." 
+                    style="width: 100%; padding: 14px 20px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"
+                    onkeyup="filterCourses()"
+                >
+                <div style="margin-top: 10px; text-align: center; color: #6b7280; font-size: 0.9rem;">
+                    Total: <span id="courseCount"><?php echo $result->num_rows; ?></span> course(s)
+                </div>
+            </div>
+        </div>
+
         <div class="courses-header">
-            <span class="course-count">Showing <?php echo $result->num_rows; ?> courses</span>
+            <span class="course-count">Showing <span id="visibleCount"><?php echo $result->num_rows; ?></span> courses</span>
             <?php if ($canCreateCourse): ?>
                 <a href="create_course.php" class="btn-create">+ Create Course</a>
             <?php endif; ?>
@@ -428,10 +449,10 @@ if ($isLoggedIn) {
         <?php if ($result->num_rows > 0): ?>
             <div class="courses-grid">
                 <?php while ($course = $result->fetch_assoc()): ?>
-                    <div class="course-card">
+                    <div class="course-card" data-course-title="<?php echo htmlspecialchars(strtolower($course['title'])); ?>">
                         <div class="course-card-image">
                             <?php if (!empty($course['image'])): ?>
-                                <img src="<?php echo htmlspecialchars(getImagePath($course['image'])); ?>" alt="<?php echo htmlspecialchars($course['title']); ?>">
+                                <img src="../images/<?php echo htmlspecialchars(getImagePath($course['image'])); ?>" alt="<?php echo htmlspecialchars($course['title']); ?>">
                             <?php else: ?>
                                 <span style="font-size: 60px;">📖</span>
                             <?php endif; ?>
@@ -497,6 +518,42 @@ if ($isLoggedIn) {
             © 2025 Ifada — Learn at your pace
         </div>
     </footer>
+
+    <script>
+        function filterCourses() {
+            const searchInput = document.getElementById('courseSearch').value.toLowerCase();
+            const courseCards = document.querySelectorAll('.course-card');
+            let visibleCount = 0;
+
+            courseCards.forEach(card => {
+                const courseTitle = card.getAttribute('data-course-title');
+                
+                if (courseTitle.includes(searchInput)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Update the visible count
+            document.getElementById('visibleCount').textContent = visibleCount;
+            
+            // Show/hide "no results" message
+            const coursesGrid = document.querySelector('.courses-grid');
+            if (visibleCount === 0 && coursesGrid) {
+                if (!document.getElementById('noResults')) {
+                    const noResultsDiv = document.createElement('div');
+                    noResultsDiv.id = 'noResults';
+                    noResultsDiv.style.cssText = 'text-align: center; padding: 60px 20px; color: #6b7280; grid-column: 1 / -1;';
+                    noResultsDiv.innerHTML = '<p style="font-size: 1.1rem; margin: 0 0 10px 0;">📚 No courses found</p><p style="margin: 0;">Try searching with different keywords</p>';
+                    coursesGrid.appendChild(noResultsDiv);
+                }
+            } else if (document.getElementById('noResults')) {
+                document.getElementById('noResults').remove();
+            }
+        }
+    </script>
 
 </body>
 </html>
