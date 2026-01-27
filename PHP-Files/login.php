@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_role'] = null;
         }
 
-        header('Location: hpage.php');
+        header('Location: homePage.php');
         exit;
     } else {
         $_SESSION['error'] = "Invalid email or password.";
@@ -91,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../styles/auth.css">
 </head>
 <body>
-    
-<a href="HomePage.html" class="back-btn">← Back to Home</a>
+
+<a href="homePage.php" class="back-btn">← Back to Home</a>
 
 
 <div class="auth-wrapper">
@@ -109,8 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button class="btn primary">Log In</button>
 
             <p class="links">
-                <a href="../HTML-Files/Forgot.html">Forgot Password?</a>
-                <a href="Register.php">Create an account</a>
+                <a href="forgot.php">Forgot Password?</a>
+                <a href="register.php">Create an account</a>
             </p>
         </form>
     </div>

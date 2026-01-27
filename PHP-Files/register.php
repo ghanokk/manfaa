@@ -93,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
                 $message = 'Registration successful. Welcome!';
                 $message_type = 'success';
-                header('Location: hpage.php');
+                header('Location: homePage.php');
                 exit;
 
             } else {
@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     </style>
 </head>
 <body>
-    <a href="hpage.php" class="back-btn">← Back to Home</a>
+    <a href="homePage.php" class="back-btn">← Back to Home</a>
 
     <div class="auth-wrapper">
         <div class="auth-box">

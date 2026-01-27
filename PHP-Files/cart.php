@@ -364,7 +364,7 @@ function getImagePath($imagePath) {
     <header class="site-header">
         <h1>🛒 Shopping Cart</h1>
         <nav class="navbar">
-            <a class="link" href="hpage.php">Ifada</a>
+            <a class="link" href="homePage.php">Ifada</a>
             <form class="nav-search" role="search">
                 <input type="search" placeholder="Search courses..." aria-label="Search courses">
             </form>
@@ -466,7 +466,7 @@ function getImagePath($imagePath) {
     <div class="footer-col">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="hpage.php">Home</a></li>
+        <li><a href="homePage.php">Home</a></li>
         <li><a href="courses.php">Courses</a></li>
         <li><a href="FAQ.html">FAQ</a></li>
         <li><a href="login.php">Sign in</a></li>

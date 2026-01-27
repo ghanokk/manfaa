@@ -586,7 +586,7 @@ $statusInfo = getEventStatus($event['event_date']);
         <nav class="nav">
             <div class="brand">Ifada</div>
             <ul class="nav-links">
-                <li><a href="hpage.php">Home</a></li>
+                <li><a href="homePage.php">Home</a></li>
                 <li><a href="courses.php">Courses</a></li>
                 <li><a href="event.php">Events</a></li>
                 <li><a href="FAQ.html">FAQ</a></li>
@@ -711,7 +711,7 @@ $statusInfo = getEventStatus($event['event_date']);
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="hpage.php">Home</a></li>
+                    <li><a href="homePage.php">Home</a></li>
                     <li><a href="courses.php">Courses</a></li>
                     <li><a href="event.php">Events</a></li>
                     <li><a href="FAQ.html">FAQ</a></li>

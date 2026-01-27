@@ -257,7 +257,7 @@ if ($isLoggedIn) {
         <nav class="nav">
             <div class="brand">Ifada</div>
             <ul class="nav-links">
-                <li><a href="hpage.php">Home</a></li>
+                <li><a href="homePage.php">Home</a></li>
                 <li><a href="courses.php">Courses</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><a href="dashboard.php" class="btn small">Dashboard</a></li>
@@ -332,7 +332,7 @@ if ($isLoggedIn) {
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
-                    <li><a href="hpage.php">Home</a></li>
+                    <li><a href="homePage.php">Home</a></li>
                     <li><a href="courses.php">Courses</a></li>
                     <li><a href="FAQ.html">FAQ</a></li>
                     <li><a href="login.php">Sign in</a></li>

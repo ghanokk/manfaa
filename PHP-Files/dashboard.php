@@ -459,7 +459,7 @@ if (is_array($userRole) && !empty($userRole)) {
     <header class="site-header">
         <h1>Dashboard</h1>
         <nav class="navbar">
-            <a class="link" href="hpage.php" style="padding:8px 10px; font-size:0.95rem;border-radius: 15px; position: relative; background-color: #0864c5ff;color: white;margin-left: 30px;">Ifada</a>
+            <a class="link" href="homePage.php" style="padding:8px 10px; font-size:0.95rem;border-radius: 15px; position: relative; background-color: #0864c5ff;color: white;margin-left: 30px;">Ifada</a>
             <form class="nav-search" role="search">
                 <input type="search" placeholder="Search courses..." aria-label="Search courses">
             </form>
@@ -918,7 +918,7 @@ if (is_array($userRole) && !empty($userRole)) {
     <div class="footer-col">
       <h4>Quick Links</h4>
       <ul>
-        <li><a href="hpage.php">Home</a></li>
+        <li><a href="homePage.php">Home</a></li>
         <li><a href="courses.php">Courses</a></li>
         <li><a href="FAQ.html">FAQ</a></li>
         <li><a href="login.php">Sign in</a></li>
